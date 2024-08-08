@@ -15,6 +15,8 @@ keywords = ["good", "excellent", "bad", "poor", "average"]
 def capitalize_keywords(review, keywords):
     for keyword in keywords:
         review = review.replace(keyword, keyword.upper())
+        review = review.replace(keyword.capitalize(), keyword.upper())
+
     return review
 
 # Process each review
@@ -37,12 +39,20 @@ reviews = [
         "The product was average. Nothing extraordinary about it."]
 
 positive_words = ["good","impressed", "excellent","highly", "great", "awesome", "fantastic", "superb", "amazing"]
-negative_words = ["bad", "poor", "terrible","average" "horrible", "awful", "disappointing", "subpar"]
-
-if positive_words in reviews:
-   word_count = len(positive_words)
-   print (word_count)
+negative_words = ["bad", "poor", "terrible","average", "horrible", "awful", "disappointing", "subpar"]
+positive_total = 0
+negative_total = 0
+for review in reviews:
     
+    for positive_word in positive_words:
+        positive_word_count = review.lower().count(positive_word)
+        positive_total += positive_word_count
+    
+    for negative_word in negative_words:
+        negative_word_count = review.lower().count(negative_word)
+        negative_total += negative_word_count
+print (f"The positive word count is",positive_total)
+print (f"The negative word count is", negative_total)    
 
 #Task 3: Review Summary
 
@@ -52,8 +62,18 @@ if positive_words in reviews:
 # Ensure that the summary does not cut off in the middle of a word.
 
 #Example: "This product is really good. I'm...",
-def smart_truncate(content, length=30, suffix='...'):
-  if len(content) <= length:
-    return content
-  else:
-    return ' '.join(content[:length+1].split(' ')[0:-1]) + suffix
+
+reviews = [
+       "This product is really good. I'm impressed with its quality.",
+        "The performance of this product is excellent. Highly recommended!",
+        "I had a bad experience with this product. It didn't meet my expectations.",
+        "Poor quality product. Wouldn't recommend it to anyone.",
+        "The product was average. Nothing extraordinary about it."]
+
+summary = [review.split() for review in reviews]
+def summarized_review(summary):
+    if len(summary) >30:
+        return summary[:30] + "..."
+    return summary
+
+print (summary)
