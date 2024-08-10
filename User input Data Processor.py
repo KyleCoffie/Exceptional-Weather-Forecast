@@ -1,25 +1,60 @@
-#Objective: The aim of this assignment is to process and format user input data.
+#Task 1: Write a function that lets the user add items to a list.
+grocery_list=[]
+def add_items():
 
-#Task 1: Input Length Validator Write a script that asks for and checks the length of the user's first name and last name.
-#  Both should be at least 2 characters long. If not, print an error message.
-
-# NOTE: Ensure that all code in your file is ready to run. 
-# This means that if someone opens your file and clicks the run button at the top, all code executes as intended. 
-# For example, if there are if statements, print statements, or for loops, they should function correctly and display output in the console as expected. 
-# If you have a function, make sure the function is called and runs.
-
-
-#The goal of this note is to ensure that all code in your Python file runs smoothly and that is has been tested.
-
-def enter_name(prompt):
     while True:
-        name = input(prompt)
-        if len(name) >= 2:
-            return name
+        grocery_item = input("What is the item you would like to add ")
+        grocery_list.append(grocery_item)
+        add_grocery_item = (input("Do you want to add another item? (y or n) ")).lower()
+
+        if add_grocery_item != 'y':
+            break
+    print ("Your grocery list is: ")
+    for item in grocery_list:
+        print(item)
+
+
+
+#Task 2: Include a function to remove items from the list.
+
+def remove_items():
+    while True:
+        grocery_item = input("What is the item you would you like to remove from the grocery list?  ")
+        
+        grocery_list.remove(grocery_item)
+        remove_grocery_item = (input("Do you want to remove another item? (y or n) ")).lower()
+
+        if remove_grocery_item != 'y':
+            break
+    print ("Your grocery list is: ")
+    for item in grocery_list:
+        print(item)
+
+#Task 3: Add a function that prints out the entire list in a formatted way.
+
+def print_items():
+    print ("Your grocery list is: ")
+    for item in grocery_list:
+        print(f"Item is: {item}")
+
+
+def menu():
+   while True:
+        print("""
+        Menu:
+        1. Add items
+        2. Remove items
+        3. Print items
+        4. Quit
+        """)
+        option = int (input("what option would you like to use? ")) 
+        if option ==1:
+            add_items()
+        elif option ==2:
+            remove_items()
+        elif option ==3:
+            print_items()
         else:
-            print("Error: Name must be at least 2 characters long.")
-
-first_name = enter_name("Enter your first name: ")
-last_name = enter_name("Enter your last name: ")
-
-print(f"Welcome, {first_name} {last_name}!")
+            print("Thank you for using this program")
+            break
+menu()
